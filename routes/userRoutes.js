@@ -11,10 +11,10 @@ router.get('/', (req, res)=>{
     User.find({}).then(users=>res.json(users));
 });
 
-router.post('/', userControllers.register);
+router.post('/register', userControllers.register);
 router.post('/login', userControllers.login);
-router.put('/:id', userControllers.updateProfile);
-router.delete('/:id', userControllers.deleteProfile);
+router.put('/updateProfile/:id', userControllers.updateProfile);
+router.delete('/deleteProfile/:id', userControllers.deleteProfile);
 
 // router.post('/register', (req,res)=>{
 //     return new Promise((resolve, reject)=>{
