@@ -7,9 +7,11 @@ const User = require ('../models/Users')
 const userControllers = require('../controllers/userControllers');
 
 
-router.get('/', (req, res)=>{
+router.get('/getAllUsers', (req, res)=>{
     User.find({}).then(users=>res.json(users));
 });
+
+
 
 router.post('/register', userControllers.register);
 router.post('/login', userControllers.login);
