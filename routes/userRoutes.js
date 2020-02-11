@@ -12,7 +12,7 @@ router.get('/', (req, res)=>{
 });
 
 router.post('/', userControllers.register);
-router.post('/', userControllers.login);
+router.post('/login', userControllers.login);
 router.put('/:id', userControllers.updateProfile);
 router.delete('/:id', userControllers.deleteProfile);
 

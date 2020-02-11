@@ -34,19 +34,23 @@ module.exports = {
     },
 
     login: (req, res)=>{
-        return new Promise((resolve, reject)=>{
-            User.findOne({email:req.body.email})
-            .then((user)=>{
-                bcrypt.compare(req.body.password, user.password)
+            return new Promise((resolve, reject)=>{
+                User.findOne({email:req.body.email})
                 .then((user)=>{
-                    return res.send(user===true ? 'You are now logged in': 'Incorrect credentials');
+                    bcrypt.compare(req.body.password, user.password)
+                    .then((user)=>{
+                        return res.send(user===true ? 'You are now logged in':
+                         'Incorrect credentials');
+                    })
+                    .catch(err=>{
+                        return res.status(400).json({message: 'Server error', err})})
+
                 })
-                .catch(err=>{
-                    return res.status(400).json({message: 'Server error', err})})
-            })
-            .catch(err =>reject(err));
-        });
-    },
+                .catch(err =>{
+                    res.status(400).json({message:"User does not exist"})
+                    reject('User does not exist')});
+            });
+        },
 
     updateProfile: (req, res) =>{
         return new Promise((resolve, reject)=>{

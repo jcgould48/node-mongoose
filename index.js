@@ -88,33 +88,33 @@ app.use('/api/users', userRoutes);
 //     });
 // });
 
-app.put('/update/:id', (req, res) =>{
-    return new Promise((resolve, reject)=>{
-        User.findById({_id: req.params.id})
-        .then(user=>{
-            const {name, email} = req.body;
-            user.name = name ? name : user.name;
-            user.email = email ? email : user.email;
+// app.put('/update/:id', (req, res) =>{
+//     return new Promise((resolve, reject)=>{
+//         User.findById({_id: req.params.id})
+//         .then(user=>{
+//             const {name, email} = req.body;
+//             user.name = name ? name : user.name;
+//             user.email = email ? email : user.email;
 
-            user.save()
-            .then((user)=> {
-                return res.status(200).json({message: 'User Updated', user })
-            })
-            .catch(err=>reject (err))
-        }).catch(err=> res.status(500).json({message: "server error", err}))
-    });
-});
+//             user.save()
+//             .then((user)=> {
+//                 return res.status(200).json({message: 'User Updated', user })
+//             })
+//             .catch(err=>reject (err))
+//         }).catch(err=> res.status(500).json({message: "server error", err}))
+//     });
+// });
 
-app.delete('/delete/:id' , (req, res)=> {
-    return new Promise((resolve, reject)=>{
-        User.findByIdAndDelete({_id: req.params.id})
-        .then((user)=> {
-            return res.status(200).json({message: 'User deleted', user})
-        })
-        .catch(err=>res.status(400).json({message:"No user to delete"}))
-    })
+// app.delete('/delete/:id' , (req, res)=> {
+//     return new Promise((resolve, reject)=>{
+//         User.findByIdAndDelete({_id: req.params.id})
+//         .then((user)=> {
+//             return res.status(200).json({message: 'User deleted', user})
+//         })
+//         .catch(err=>res.status(400).json({message:"No user to delete"}))
+//     })
     
-})
+// })
 
 app.listen(port, () => {
 console.log(`Listening on port ${port}`);
